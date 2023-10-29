@@ -66,7 +66,7 @@
                 <ng-container matColumnDef="editar">
                     <mat-header-cell *matHeaderCellDef> Editar </mat-header-cell>
                     <mat-cell *matCellDef="let lancamento">
-                        <button mat-icon-button class="btn-secondary" *ngIf="itemValidoEAvulso(lancamento)">
+                        <button mat-icon-button class="btn-secondary" (click)="editarLancamento(lancamento) ">
                             <mat-icon>edit</mat-icon>
                         </button>
                     </mat-cell>
@@ -90,3 +90,4 @@
         <p>Total: {{ valorTotal | currency:'BRL' }}</p>
     </div>
 </div>
+

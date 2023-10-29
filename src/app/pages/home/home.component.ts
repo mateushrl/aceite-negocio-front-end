@@ -4,6 +4,9 @@ import { EStatus, ILancamento } from '../../models/lancamento';
 import { FormControl, FormGroup } from '@angular/forms';
 import { format } from 'date-fns';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AtualizacaoLancamentoComponent } from '../atualizacao-lancamento/atualizacao-lancamento.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +14,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  constructor(public lancamentoService: LancamentoService, private router: Router) {
+  constructor(public lancamentoService: LancamentoService, private router: Router, private dialog: MatDialog) {
   }
 
   displayedColumns: string[] = ['id', 'descricao', 'valor', 'status', 'avulso', 'data', 'editar', 'cancelar'];
@@ -77,12 +80,21 @@ export class HomeComponent implements OnInit {
     return `${month}-${day}-${year}`;
   }
 
-  itemValidoEAvulso(lan: ILancamento) {
-    if (lan.avulso == true && lan.status == EStatus.Valido)
-      return true;
-    else
-      return false;
+  editarLancamento(lancamento: ILancamento) {
+    // const dialogRef = this.dialog.open(AtualizacaoLancamentoComponent, {
+    //   width: '250px',
+    //   data: { lancamento: lancamento }
+    // });
+  
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if (result) {
+    //     this.lancamentoService.editarLancamento(result).subscribe(() => {
+         
+    //     });
+    //   }
+    // });
   }
+
 
   criaLancamento(lancamento: ILancamento) {
   }
@@ -104,4 +116,5 @@ export class HomeComponent implements OnInit {
       }
     }
   }
+
 }

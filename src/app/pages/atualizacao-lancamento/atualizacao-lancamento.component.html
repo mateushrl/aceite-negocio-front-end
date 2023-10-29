@@ -1,0 +1,15 @@
+<mat-dialog-content>
+    <form #editForm="ngForm">
+      <mat-form-field>
+        <input matInput placeholder="Valor" name="valor" [(ngModel)]="lancamento.valor">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Data" name="data" [(ngModel)]="lancamento.data">
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="onSaveClick()">Salvar</button>
+    <button mat-button (click)="onCancelClick()">Cancelar</button>
+  </mat-dialog-actions>
