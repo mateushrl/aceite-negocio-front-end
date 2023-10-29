@@ -1,0 +1,29 @@
+
+
+  .btn-primary {
+    height: 50px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+  }
+  
+  .data {
+    padding: 10px;
+    margin: 10px;
+  }
+
+  .btn-secondary{
+    height: 40px;
+    width: 40px;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+  }
+
+  .btn-cancelar{
+    height: 40px;
+    width: 40px;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+  }

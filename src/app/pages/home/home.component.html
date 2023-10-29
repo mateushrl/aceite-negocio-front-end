@@ -1,0 +1,92 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Gerenciamento de Extratos</li>
+    </ol>
+</nav>
+
+<div class="container">
+
+    <mat-card class="list-car">
+        <mat-card-header>
+            <mat-card-title>Extratos</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-form-field class="data">
+                <mat-label>Filtro de Data</mat-label>
+                <mat-date-range-input
+                  [formGroup]="campaignOne"
+                  [rangePicker]="campaignOnePicker"
+                  [comparisonStart]="campaignTwo.value.start"
+                  [comparisonEnd]="campaignTwo.value.end">
+                  <input matStartDate placeholder="Data Inicial" formControlName="start">
+                  <input matEndDate placeholder="Data Final" formControlName="end">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+                <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+              </mat-form-field>
+
+              <button class="btn-primary" (click)=" aplicarFiltroData()" mat-raised-button color="primary">Aplicar Filtro</button>
+              <button class="btn-primary" (click)="abrirPaginaAdicionarLancamento()" mat-raised-button color="primary">Adicionar Lançamento Não Avulso</button>
+
+
+            <mat-table [dataSource]="lancamentos">
+                <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+                    <mat-cell *matCellDef="let lancamento"> {{lancamento.id}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="descricao">
+                    <mat-header-cell *matHeaderCellDef> Descrição </mat-header-cell>
+                    <mat-cell *matCellDef="let lancamento"> {{lancamento.descricao}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="valor">
+                    <mat-header-cell *matHeaderCellDef> Valor </mat-header-cell>
+                    <mat-cell *matCellDef="let lancamento">
+                        {{ lancamento.valor | currency:'BRL' }}
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+                    <mat-cell *matCellDef="let lancamento"> {{lancamento.status == 1 ? "Válido":"Cancelado"}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="avulso">
+                    <mat-header-cell *matHeaderCellDef> Avulso? </mat-header-cell>
+                    <mat-cell *matCellDef="let lancamento"> {{lancamento.avulso ? 'Sim' : 'Não' }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="data">
+                    <mat-header-cell *matHeaderCellDef> Data </mat-header-cell>
+                    <mat-cell *matCellDef="let lancamento"> {{lancamento.data}} </mat-cell>
+                </ng-container>
+
+
+                <ng-container matColumnDef="editar">
+                    <mat-header-cell *matHeaderCellDef> Editar </mat-header-cell>
+                    <mat-cell *matCellDef="let lancamento">
+                        <button mat-icon-button class="btn-secondary" *ngIf="itemValidoEAvulso(lancamento)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="cancelar">
+                    <mat-header-cell *matHeaderCellDef> Cancelar </mat-header-cell>
+                    <mat-cell *matCellDef="let lancamento">
+                        <button mat-icon-button class="btn-cancelar" (click)="cancelarLancamento(lancamento) ">
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+            </mat-table>
+        </mat-card-content>
+    </mat-card>
+    <div class="total-container">
+        <p>Total: {{ valorTotal | currency:'BRL' }}</p>
+    </div>
+</div>
