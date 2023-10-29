@@ -26,4 +26,18 @@ export class LancamentoService {
 
     return this.httpClient.get<ILancamento[]>(`${this.url}Lancamentos/ObtemLancamentosFiltrados`, { params });
   }
+
+  async criarLancamento(lancamento: ILancamento): Promise<Observable<ILancamento>> {
+    const lancamentoJSON = JSON.stringify(lancamento); 
+    return await this.httpClient.post<ILancamento>(`${this.url}Lancamentos/CriaLancamento`, lancamentoJSON, {
+      headers: { 'Content-Type': 'application/json' }
+    });  
+  }
+
+cancelaLancamento(idLancamento: number){
+  console.log(this.url+"Lancamentos/CancelaLancamento/"+idLancamento)
+  return this.httpClient.delete<ILancamento[]>(this.url+"Lancamentos/CancelaLancamento/"+idLancamento)
+  .pipe()
+}
+
 }

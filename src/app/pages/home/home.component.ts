@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   constructor(public lancamentoService: LancamentoService, private router: Router) {
   }
 
-  displayedColumns: string[] = ['id', 'descricao', 'valor', 'status', 'avulso', 'data', 'editar', ];
+  displayedColumns: string[] = ['id', 'descricao', 'valor', 'status', 'avulso', 'data', 'editar', 'cancelar'];
 
   lancamento = {} as ILancamento;
   lancamentos: ILancamento[] = [];
@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit {
   }
 
   formatDate(date: Date): string {
-    
+
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     const year = date.getFullYear();
@@ -84,12 +84,24 @@ export class HomeComponent implements OnInit {
       return false;
   }
 
-  criaLancamento(lancamento: ILancamento){
+  criaLancamento(lancamento: ILancamento) {
   }
-  limparFormulario(lancamento: ILancamento){
+  limparFormulario(lancamento: ILancamento) {
 
   }
   abrirPaginaAdicionarLancamento() {
     this.router.navigate(['/adicionar-lancamento']);
+  }
+
+  cancelarLancamento(lancamento: ILancamento) {
+    if (lancamento.status == EStatus.Valido) {
+      this.lancamentoService.cancelaLancamento(lancamento.id);
+
+      const elementoParaAtualizar = this.lancamentos.find(item => item.id === lancamento.id);
+
+      if (elementoParaAtualizar) {
+        elementoParaAtualizar.status = EStatus.Cancelado;
+      }
+    }
   }
 }

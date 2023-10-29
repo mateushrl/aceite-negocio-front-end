@@ -5,14 +5,13 @@
 </nav>
 
 <div class="container">
-    <button (click)="abrirPaginaAdicionarLancamento()" mat-raised-button color="primary">Adicionar Lançamento</button>
 
     <mat-card class="list-car">
         <mat-card-header>
             <mat-card-title>Extratos</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <mat-form-field class="example-form-field">
+            <mat-form-field class="data">
                 <mat-label>Filtro de Data</mat-label>
                 <mat-date-range-input
                   [formGroup]="campaignOne"
@@ -26,7 +25,8 @@
                 <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
               </mat-form-field>
 
-              <button (click)=" aplicarFiltroData()" mat-raised-button color="primary">Aplicar Filtro</button>
+              <button class="btn-primary" (click)=" aplicarFiltroData()" mat-raised-button color="primary">Aplicar Filtro</button>
+              <button class="btn-primary" (click)="abrirPaginaAdicionarLancamento()" mat-raised-button color="primary">Adicionar Lançamento Não Avulso</button>
 
 
             <mat-table [dataSource]="lancamentos">
@@ -66,8 +66,17 @@
                 <ng-container matColumnDef="editar">
                     <mat-header-cell *matHeaderCellDef> Editar </mat-header-cell>
                     <mat-cell *matCellDef="let lancamento">
-                        <button mat-icon-button color="primary" *ngIf="itemValidoEAvulso(lancamento)">
+                        <button mat-icon-button class="btn-secondary" *ngIf="itemValidoEAvulso(lancamento)">
                             <mat-icon>edit</mat-icon>
+                        </button>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="cancelar">
+                    <mat-header-cell *matHeaderCellDef> Cancelar </mat-header-cell>
+                    <mat-cell *matCellDef="let lancamento">
+                        <button mat-icon-button class="btn-cancelar" (click)="cancelarLancamento(lancamento) ">
+                            <mat-icon>cancel</mat-icon>
                         </button>
                     </mat-cell>
                 </ng-container>

@@ -1,38 +1,31 @@
-<mat-card class="add-car">
+<mat-card class="center-card">
     <mat-card-header>
-      <mat-card-title>Adicionar/Atualizar Lançamento</mat-card-title>
+      <mat-card-title>Formulário de Lançamento Não Avulso</mat-card-title>
     </mat-card-header>
-    <mat-card-content>
-      <form #f="ngForm" (ngSubmit)="f.form.valid && criaLancamento(lancamento)" novalidate>
+  
+    <mat-card-content class="form-card-content">
+      <form #f="ngForm" (ngSubmit)="f.form.valid " novalidate>
         <mat-form-field class="form-group">
           <mat-label for="descricao">Descrição</mat-label>
-          <input matInput type="text" [(ngModel)]="lancamento.descricao" id="descricao" name="descricao" #descricao="ngModel" required placeholder="Digite a descrição">
+          <input matInput type="text" [(ngModel)]="lancamento.descricao" id="descricao" name="descricao" #descricao="ngModel"
+            required placeholder="Digite a descrição">
           <mat-error *ngIf="f.submitted && descricao.invalid">Descrição é obrigatória</mat-error>
         </mat-form-field>
-        <mat-form-field class="form-group">
-          <mat-label for="data">Data</mat-label>
+  
+     
+          <mat-label for="data"></mat-label>
           <input matInput type="date" [(ngModel)]="lancamento.data" id="data" name="data" #data="ngModel" required>
           <mat-error *ngIf="f.submitted && data.invalid">Data é obrigatória</mat-error>
-        </mat-form-field>
+      
+  
         <mat-form-field class="form-group">
           <mat-label for="valor">Valor</mat-label>
-          <input matInput type="number" [(ngModel)]="lancamento.valor" id="valor" name="valor" #valor="ngModel" required placeholder="Digite o valor">
+          <input matInput type="number" [(ngModel)]="lancamento.valor" id="valor" name="valor" #valor="ngModel"
+            required placeholder="Digite o valor">
           <mat-error *ngIf="f.submitted && valor.invalid">Valor é obrigatório</mat-error>
         </mat-form-field>
-        <mat-form-field class="form-group">
-          <mat-label for="status">Status</mat-label>
-          <mat-select [(ngModel)]="lancamento.status" id="status" name="status" #status="ngModel" required>
-            <!-- <mat-option value="Aguardando">Aguardando</mat-option>
-            <mat-option value="Concluído">Concluído</mat-option>
-            <mat-option value="Cancelado">Cancelado</mat-option> -->
-          </mat-select>
-          <mat-error *ngIf="f.submitted && status.invalid">Status é obrigatório</mat-error>
-        </mat-form-field>
-        <div class="form-group">
-          <mat-checkbox [(ngModel)]="lancamento.avulso" id="avulso" name="avulso" #avulso="ngModel">Avulso</mat-checkbox>
-        </div>
-        <button type="submit" mat-raised-button class="btn-add-car">Salvar</button>
-        <!-- <button type="reset" mat-button class="btn-add-car" (click)="limparFormulario(lancamento)">Cancelar</button> -->
+  
+        <button (click)="criaLancamento()" type="submit" mat-raised-button color="primary" class="submit-button">Salvar</button> 
       </form>
     </mat-card-content>
   </mat-card>

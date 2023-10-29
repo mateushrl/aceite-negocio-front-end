@@ -15,6 +15,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AdicionarLancamentoComponent } from '../adicionar-lancamento-component/adicionar-lancamento.component';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -37,6 +38,8 @@ import { AdicionarLancamentoComponent } from '../adicionar-lancamento-component/
     FormsModule,
     MatNativeDateModule,
     ReactiveFormsModule,
+
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
